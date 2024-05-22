@@ -36,8 +36,10 @@ This project showcases a comprehensive integration of a Java application with My
 ## How to Run
 1. Clone the project repository.
 2. Open the project in your preferred IDE (e.g., IntelliJ IDEA).
-3. Ensure both MySQL and Redis servers are up and running.
-4. Execute the `Main` class to start the application.
+3. To run Redis and MySQL as Docker containers, use the following commands:
+  - `docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root`
+  - `docker run -d --name redis -p 6379:6379 redis:latest `
+5. Execute the `Main` class to start the application.
 
 ## Performance Testing
 - The project includes a performance test suite to compare data retrieval times between MySQL and Redis.
