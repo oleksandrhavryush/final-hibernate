@@ -1,53 +1,50 @@
-# Project Description
+# Java MySQL-Redis Integration: Efficient Data Retrieval
 
-## Overview
-This project showcases a comprehensive integration of a Java application with MySQL, a relational database, and Redis, a high-performance in-memory data store. The primary objective is to demonstrate efficient data retrieval by leveraging Redis for caching frequently accessed data, and to compare the performance with traditional MySQL queries.
+This project demonstrates a comprehensive integration of a Java application with MySQL, a relational database, and Redis, a high-performance in-memory data store. The primary objective is to showcase efficient data retrieval by leveraging Redis for caching frequently accessed data and comparing the performance with traditional MySQL queries.
 
-## Key Features
+## Project Overview
 
-### Java Classes
-- **Main**: The central orchestration class, responsible for fetching data from MySQL, transforming it, and storing it in Redis. It also performs performance benchmarking to highlight the differences between MySQL and Redis data retrieval.
-- **CityDAO**: A Data Access Object (DAO) for managing city-related database operations.
-- **CountryDAO**: A DAO for handling operations related to countries.
+The project encompasses several key features, including:
 
-### Domain Classes
-- **City**: Represents the city entity.
-- **Country**: Represents the country entity.
-- **CountryLanguage**: Represents the language spoken in a country.
-
-### Redis Classes
-- **CityCountry**: Represents a city-country pair stored in Redis.
-- **Language**: Represents a language spoken in a country.
-
-### External Libraries
-- **Jackson**: Utilized for JSON serialization and deserialization, ensuring smooth data transformation.
-- **Hibernate**: Facilitates object-relational mapping for seamless database operations.
-- **Lettuce**: A robust Redis client for Java, enabling efficient interaction with the Redis server.
+- **Java Classes:** The central orchestration class responsible for fetching data from MySQL, transforming it, and storing it in Redis. It also performs performance benchmarking to highlight the differences between MySQL and Redis data retrieval.
+- **Domain Classes:** Representing the city, country, and language entities in the database.
+- **Redis Classes:** Representing the city-country pair and language stored in Redis.
+- **External Libraries:** Utilizes Jackson for JSON serialization and deserialization, Hibernate for object-relational mapping, and Lettuce as a robust Redis client for Java.
 
 ## Setup and Configuration
 
-### MySQL Database
-- The application connects to a MySQL database with configuration details (URL, username, password) specified in the `Main` class.
-- Includes a database schema encompassing tables for countries, cities, and languages.
+- **MySQL Database:** The application connects to a MySQL database with configuration details specified in the `Main` class.
+- **Redis:** Requires Redis to be installed and running on the local machine, typically on the default port (6379).
 
-### Redis
-- Requires Redis to be installed and running on the local machine, typically on the default port (6379).
+## Getting Started
 
-## How to Run
-1. Clone the project repository.
-2. Open the project in your preferred IDE (e.g., IntelliJ IDEA).
-3. To run Redis and MySQL as Docker containers, use the following commands:
-  - `docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root`
-  - `docker run -d --name redis -p 6379:6379 redis:latest `
-5. Execute the `Main` class to start the application.
+1. **Clone the Project Repository:** Clone the repository to your local machine.
+2. **Open the Project:** Open the project in your preferred IDE (e.g., IntelliJ IDEA).
+3. **Build the Docker Image for MySQL:** Execute the following command to build the Docker image named `my-db`:
+    ```bash
+    docker build -t my-db .
+    ```
+4. **Run the Docker Container for MySQL:** Execute the following command to run the Docker container using the `my-db` image. This will start the MySQL server and expose it on port 3306:
+    ```bash
+    docker run --name my-db -d -p 3306:3306 my-db
+    ```
+5. **Run the Docker Container for Redis:** Use the following command to run a Redis container. This will start the Redis server and expose it on port 6379:
+    ```bash
+    docker run -d --name redis -p 6379:6379 redis:latest
+    ```
+6. **Execute the Main Class:** Run the `Main` class to start the application.
+
+Now you have two Docker containers running concurrently, one for MySQL and one for Redis. Your application can connect to both of these services as needed.
+
 
 ## Performance Testing
-- The project includes a performance test suite to compare data retrieval times between MySQL and Redis.
-- It measures the time taken to fetch data using randomly selected city IDs, providing insights into the efficiency gains achieved by using Redis.
+
+The project includes a performance test suite to compare data retrieval times between MySQL and Redis. It measures the time taken to fetch data using randomly selected city IDs, providing insights into the efficiency gains achieved by using Redis.
 
 ## Resource Management
-- The `shutdown()` method in the `Main` class ensures proper cleanup of resources, including closing the Hibernate session factory and shutting down the Redis client, maintaining optimal resource management.
+
+The `shutdown()` method in the `Main` class ensures proper cleanup of resources, including closing the Hibernate session factory and shutting down the Redis client, maintaining optimal resource management.
 
 ## Additional Information
-- The project is Docker-ready, enabling easy setup and deployment of MySQL and Redis servers in containerized environments.
-- Redis Insight can be optionally used to visualize and manage data stored in Redis, offering a user-friendly interface for deeper insights.
+
+The project is Docker-ready, enabling easy setup and deployment of MySQL and Redis servers in containerized environments. Redis Insight can be optionally used to visualize and manage data stored in Redis, offering a user-friendly interface for deeper insights.
